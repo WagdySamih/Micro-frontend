@@ -11,7 +11,10 @@ export const useAppRenderer = (mountFn, ref) => {
 
   useEffect(() => {
     if (!ref?.current) return;
-    const { onParentNavigate } = mountFn(ref.current, { onNavigate });
+    const { onParentNavigate } = mountFn(ref.current, {
+      onNavigate,
+      initialPath: history.location.pathname,
+    });
     if (onParentNavigate) history.listen(onParentNavigate);
   }, []);
 };
